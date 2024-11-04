@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "../images/logon.png";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +42,17 @@ function Login() {
       toast.error("User not found");
     }
   };
+
+  useEffect(() => {
+    if (loginSuccess) {
+      const timer = setTimeout(() => {
+        navigate("/home");
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loginSuccess, navigate]);
+
 
   return (
     <div className=" min-h-screen flex items-center justify-center">
