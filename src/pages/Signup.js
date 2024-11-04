@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from '../images/logob.png';
+import logo from '../images/logon.png';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -54,7 +54,8 @@ function Signup(){
     }, [registrationSuccess, navigate]);
 
     return (
-        <div className="bg-gray-400 min-h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
           <ToastContainer />
           {/* Container */}
           <div className="container mx-auto">

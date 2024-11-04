@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import logo from "../images/logob.png";
+import logo from "../images/logon.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,7 +44,8 @@ function Login() {
   };
 
   return (
-    <div className="bg-gray-400 min-h-screen flex items-center justify-center">
+    <div className=" min-h-screen flex items-center justify-center">
+      <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
       <ToastContainer/>
       {/* Container */}
       <div className="container mx-auto">
