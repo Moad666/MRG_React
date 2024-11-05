@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 const Home = () => {
+  const [restaurants, setRestaurant] = useState([]);
+
+  const fetchAllRestaurants = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8080/restaurant/findAll"
+      );
+      setRestaurant(response.data);
+    } catch (error) {
+      console.error("Something went wrong while fetching courses", error);
+    }
+  };
+  useEffect(() => {
+    fetchAllRestaurants();
+  }, []);
+
   return (
     <div className="min-h-screen relative">
       <div className="absolute inset-0 -z-10 h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
@@ -16,21 +33,27 @@ const Home = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 p-6 mt-40">
-        <div className="max-w-md max-auto bg-gray-950/60 border border-gray-900 rounded-3xl p-4 rounded-lg shadow-lg">
-          <img
-            src="https://annuaire.yalaho.ma/wp-content/uploads/2016/04/44003qjPvaf.jpg"
-            alt="Restaurant 1"
-            className="w-full h-50 object-cover rounded-t-lg"
-          />
-          <h3 className="text-lg font-semibold mt-2 text-white">
-            Restaurant Title 1
-          </h3>
-          <p className="text-gray-200 mt-1">
-            A brief description of Restaurant 1, highlighting its unique dishes
-            and ambiance.
-          </p>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-6 mt-40">
+        {restaurants.map((restaurant) => (
+          <div
+            key={restaurant.id} // Ensure each card has a unique key
+            className="max-w-md mx-auto bg-gray-950/60 border border-gray-900 rounded-3xl p-4 shadow-lg mt-5"
+          >
+            <img
+              src={
+                restaurant.image
+              }
+              alt={restaurant.name}
+              className="w-full h-50 object-cover rounded-t-lg"
+            />
+            <h3 className="text-lg font-semibold mt-2 text-white">
+              {restaurant.name}
+            </h3>
+            <p className="text-gray-200 mt-1">
+              {restaurant.description}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
